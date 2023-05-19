@@ -10,5 +10,5 @@ https://hub.docker.com/r/pericles/gartner-gpt-writer
 # To run standalone, install the python modules:
 pip install streamlit langchain openai wikipedia chromadb tiktoken
 
-# run the app:
+# then run the app:
 streamlit run app.py
