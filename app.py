@@ -1,4 +1,3 @@
-# Bring in deps
 # python deps
 # streamlit - used to build the app
 # langchain - used to build the LLM workflow
@@ -6,7 +5,13 @@
 # wikipedia - used to connect GPT to wikipedia
 # chromadb - vector storage
 # tiktoken - backedn tokenizer for openai
+
+# To install deps:
 # pip install streamlit langchain openai wikipedia chromadb tiktoken
+# To run the app:
+# streamlit run app.py
+
+# Bring in deps
 import os 
 from apikey import apikey 
 
@@ -21,20 +26,20 @@ os.environ['OPENAI_API_KEY'] = apikey
 
 # App framework
 st.title('✍🏻 Gartner GPT Writer')
-prompt = st.text_input('Give me a topic to generate a Gartner style research note from') 
+prompt = st.text_input('To generate a title and research note, specify a topic below') 
 
-# Prompt templates
+# Prompt templates for the research note title
 title_template = PromptTemplate(
     input_variables = ['topic'], 
     template='write me a Gartner style research note title about {topic}'
 )
 
+# Prompt template for the research note
 script_template = PromptTemplate(
     input_variables = ['title', 'wikipedia_research'], 
     template='write me a Gartner style research note based on this title TITLE: {title} while leveraging this wikipedia reserch:{wikipedia_research} '
 )
 
-# Memory 
 title_memory = ConversationBufferMemory(input_key='topic', memory_key='chat_history')
 script_memory = ConversationBufferMemory(input_key='title', memory_key='chat_history')
 
